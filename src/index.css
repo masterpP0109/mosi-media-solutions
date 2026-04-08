@@ -5,6 +5,15 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   :root {
     --background: 0 0% 100%;
     --foreground: 224 40% 14%;
@@ -34,7 +43,7 @@
     --input: 220 20% 90%;
     --ring: 230 55% 28%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
     --navy: 230 55% 28%;
     --navy-light: 228 45% 40%;
@@ -114,6 +123,49 @@
       0 0 60px rgba(139, 0, 0, 0.1),
       0 20px 40px rgba(0, 0, 0, 0.3);
     border-color: rgba(139, 0, 0, 0.5);
+  }
+
+  /* iOS-style smooth transitions */
+  .ios-transition {
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .ios-button {
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .ios-button:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+  }
+
+  .ios-card {
+    transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .ios-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.12),
+      0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .ios-link {
+    transition: all 0.25s ease-out;
+  }
+
+  .ios-link:hover {
+    opacity: 0.8;
+  }
+
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .section-padding {
+      padding: 3rem 0;
+    }
   }
 
   @keyframes neon-pulse {
