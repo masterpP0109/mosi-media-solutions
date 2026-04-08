@@ -1,4 +1,4 @@
-import { ArrowRight, Play, Star, MapPin, Mail, Phone, Heart, Camera, Sparkles } from "lucide-react";
+import { ArrowRight, Play, Star, MapPin, Mail, Phone, Heart, Camera, Sparkles, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Metadata from "@/components/Metadata";
@@ -14,6 +14,17 @@ const Index = () => {
         description="Mosi Media Solutions - Your premier multimedia agency in Victoria Falls, Zimbabwe. Professional video production, photography, event coverage, and digital marketing services."
         ogUrl="https://mosimediasolutions.com"
       />
+
+      {/* Glass Morphism Logo Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-[0.02] blur-3xl" style={{ background: 'linear-gradient(135deg, #191970, #8B0000)' }} />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-[0.02] blur-3xl" style={{ background: 'linear-gradient(135deg, #8B0000, #2F2F5F)' }} />
+        <img 
+          src="/images/cropped-mms-fINAL1-WHITE.webp" 
+          alt="Mosi Media Solutions" 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-auto opacity-[0.015] rotate-12"
+        />
+      </div>
 
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -463,6 +474,60 @@ const Index = () => {
                 </motion.div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="section-padding bg-background">
+        <div className="container mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Testimonials</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              We take pride in delivering exceptional results. Here's what our clients have to say about working with us.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah Mitchell",
+                role: "Marketing Director, Moldon Marketing",
+                quote: "Mosi Media Solutions transformed our brand presence. Their video production quality is outstanding, and they delivered on time and within budget. Highly recommended!"
+              },
+              {
+                name: "John & Emma Thompson",
+                role: "Victoria Falls Wedding Clients",
+                quote: "Our elopement was absolutely magical! The team captured every special moment beautifully. The rainforest ceremony was beyond our dreams."
+              },
+              {
+                name: "David Mutapa",
+                role: "CEO, ZB Bank",
+                quote: "Professional, creative, and reliable. Mosi Media Solutions helped us create a brand film that truly represents our community values. Excellent work!"
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                className="bg-card rounded-xl p-8 shadow-lg hover:shadow-xl transition-all"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <Quote className="w-10 h-10 text-secondary/30 mb-4" />
+                <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
+                <div className="border-t border-border pt-4">
+                  <h4 className="font-heading text-lg font-bold">{testimonial.name}</h4>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
