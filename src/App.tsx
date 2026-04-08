@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/lib/page-transition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GlassBackground from "@/components/GlassBackground";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -23,6 +24,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <GlassBackground />
         <Navbar />
         <PageTransition>
           <Routes>

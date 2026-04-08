@@ -15,17 +15,6 @@ const Index = () => {
         ogUrl="https://mosimediasolutions.com"
       />
 
-      {/* Glass Morphism Logo Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-[0.02] blur-3xl" style={{ background: 'linear-gradient(135deg, #191970, #8B0000)' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-[0.02] blur-3xl" style={{ background: 'linear-gradient(135deg, #8B0000, #2F2F5F)' }} />
-        <img 
-          src="/images/cropped-mms-fINAL1-WHITE.webp" 
-          alt="Mosi Media Solutions" 
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-auto opacity-[0.015] rotate-12"
-        />
-      </div>
-
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
