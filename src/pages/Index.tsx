@@ -4,18 +4,8 @@ import { motion } from "framer-motion";
 import Metadata from "@/components/Metadata";
 import Aurora from "@/components/Aurora";
 import RippleGrid from "@/components/RippleGrid";
-import LogoLoop from "@/components/LogoLoop";
-import "@/components/LogoLoop.css";
+import LogoCarousel from "@/components/LogoCarousel";
 import aboutTeam from "@/assets/about-team.jpg";
-
-const clientLogos = [
-  { src: "/images/clientsLogos/moldon.webp", alt: "Moldon Marketing" },
-  { src: "/images/clientsLogos/falls-hotel.webp", alt: "Victoria Falls Hotel" },
-  { src: "/images/clientsLogos/stanbic.webp", alt: "Stanbic Bank" },
-  { src: "/images/clientsLogos/zb1.webp", alt: "ZB Bank" },
-  { src: "/images/clientsLogos/logistics.webp", alt: "Logistics Company" },
-  
-];
 
 const Index = () => {
   return (
@@ -493,17 +483,7 @@ const Index = () => {
           </motion.div>
 
           <div className="opacity-80 overflow-hidden">
-            <LogoLoop
-              logos={clientLogos}
-              speed={80}
-              direction="left"
-              logoHeight={70}
-              gap={80}
-              pauseOnHover={true}
-              fadeOut={true}
-              fadeOutColor="#1e1e2e"
-              ariaLabel="Client logos"
-            />
+            <LogoCarousel />
           </div>
         </div>
       </section>
