@@ -485,6 +485,21 @@ const Index = () => {
           <div className="opacity-80 overflow-hidden">
             <LogoCarousel />
           </div>
+
+          <motion.div 
+            className="text-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-muted-foreground mb-4">Want to join our family of successful brands?</p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#CD5C5C] hover:text-[#8B0000] transition-all duration-300 neon-hover"
+            >
+              Add Your Company to Our Success Story <ArrowRight size={16} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 

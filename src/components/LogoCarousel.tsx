@@ -38,7 +38,7 @@ const LogoCarousel = () => {
             key={i}
             src={logo.src}
             alt={logo.alt}
-            className="h-16 object-contain rounded-full"
+            className="h-28 object-contain rounded-full"
           />
         ))}
       </div>
