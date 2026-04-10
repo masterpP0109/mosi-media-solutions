@@ -6,7 +6,7 @@ const navItems = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Services", path: "/services" },
-  { label: "Mosi Exclusive", path: "/contact" },
+  { label: "Mosi Exclusive", path: "/mosi-exclusive" },
   { label: "Portfolio", path: "/portfolio" },
   { label: "Blogs", path: "/blogs" },
   { label: "Packages", path: "/packages" },
