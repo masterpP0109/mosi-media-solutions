@@ -4,7 +4,18 @@ import { motion } from "framer-motion";
 import Metadata from "@/components/Metadata";
 import Aurora from "@/components/Aurora";
 import RippleGrid from "@/components/RippleGrid";
+import LogoLoop from "@/components/LogoLoop";
+import "@/components/LogoLoop.css";
 import aboutTeam from "@/assets/about-team.jpg";
+
+const clientLogos = [
+  { src: "/images/clientsLogos/moldon.webp", alt: "Moldon Marketing" },
+  { src: "/images/clientsLogos/falls-hotel.webp", alt: "Victoria Falls Hotel" },
+  { src: "/images/clientsLogos/stanbic.webp", alt: "Stanbic Bank" },
+  { src: "/images/clientsLogos/zb1.webp", alt: "ZB Bank" },
+  { src: "/images/clientsLogos/logistics.webp", alt: "Logistics Company" },
+  
+];
 
 const Index = () => {
   return (
@@ -136,26 +147,23 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               { title: "Video Production", desc: "Professional filming, editing, and post-production for commercials, documentaries, and social media content." },
               { title: "Photography", desc: "High-quality corporate, product, and event photography that captures your brand's essence." },
-              { title: "Event Coverage", desc: "Complete audio-visual solutions for conferences, weddings, and special events." },
-              { title: "Live Streaming", desc: "Multi-platform live streaming with professional encoding and technical support." },
-              { title: "Digital Marketing", desc: "Strategic online marketing campaigns to boost your brand's visibility and engagement." },
-              { title: "Brand Development", desc: "Complete brand identity solutions from logo design to comprehensive brand guidelines." }
+              { title: "Event Coverage", desc: "Complete audio-visual solutions for conferences, weddings, and special events." }
             ].map((service, index) => (
               <motion.div
                 key={service.title}
-                className="bg-background p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                className="bg-background p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow min-h-[220px]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.03 }}
-              >
-                <h3 className="font-heading text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-muted-foreground">{service.desc}</p>
-              </motion.div>
+                >
+                  <h3 className="font-heading text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground">{service.desc}</p>
+                </motion.div>
             ))}
           </div>
 
@@ -205,11 +213,11 @@ const Index = () => {
               </div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  to="/contact"
+                  to="/mosi-exclusive"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-all duration-300 neon-hover"
                   style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)", boxShadow: "0 2px 12px rgba(139,0,0,0.35)" }}
                 >
-                  Inquire Now
+                  Learn More
                   <ArrowRight size={18} />
                 </Link>
               </motion.div>
@@ -251,31 +259,35 @@ const Index = () => {
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Work</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore our portfolio of successful projects across events, video production, photography, and branding.
+              Showcasing our finest work in video production, photography, events, and brand development for leading companies across Africa.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             {[
-              { title: "Moldon Marketing Campaign", category: "Corporate", desc: "Full video production and photography" },
-              { title: "Afdis Product Launch", category: "Events", desc: "Event management and media coverage" },
-              { title: "Victoria Falls Wedding", category: "Photography", desc: "Intimate elopement photography" }
+              { title: "Moldon Marketing Campaign", category: "Corporate Video", desc: "Complete video production and photography for a major regional marketing campaign. Included brand videos, social media content, and event documentation.", logo: "/images/clientsLogos/moldon.webp" },
+              { title: "Victoria Falls Hotel", category: "Hospitality & Tourism", desc: "Comprehensive brand photography and video campaign showcasing the luxury hospitality experience, including promotional videos and print materials.", logo: "/images/clientsLogos/falls-hotel.webp" },
+              { title: "Stanbic Bank Zimbabwe", category: "Corporate & Finance", desc: "Corporate event coverage for annual meetings and conferences, plus marketing content creation for digital platforms across the banking sector.", logo: "/images/clientsLogos/stanbic.webp" }
             ].map((project, index) => (
               <motion.div
                 key={project.title}
-                className="group rounded-lg overflow-hidden bg-card border border-border hover:border-secondary/30 transition-all hover:shadow-lg"
+                className="group rounded-xl overflow-hidden bg-card border border-border hover:border-secondary/30 transition-all hover:shadow-lg min-h-[380px]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center">
-                  <span className="text-secondary/50 text-4xl">▶</span>
+                <div className="h-48 bg-gradient-to-br from-secondary/10 to-accent/10 flex items-center justify-center p-6">
+                  <img 
+                    src={project.logo} 
+                    alt={project.title} 
+                    className="max-h-24 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-full"
+                  />
                 </div>
-                <div className="p-5">
+                <div className="p-6">
                   <span className="text-secondary text-xs uppercase tracking-wider font-medium">{project.category}</span>
-                  <h3 className="font-heading text-lg font-semibold mt-1 mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm">{project.desc}</p>
+                  <h3 className="font-heading text-xl font-semibold mt-2 mb-3">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{project.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -318,7 +330,7 @@ const Index = () => {
             ].map((post, index) => (
               <motion.article 
                 key={post.title}
-                className="group bg-background rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                className="group bg-background rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow min-h-[280px]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -377,7 +389,7 @@ const Index = () => {
             ].map((pkg, index) => (
               <motion.div
                 key={pkg.name}
-                className={`relative bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all group ${
+                className={`relative bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all group min-h-[300px] ${
                   pkg.popular ? 'ring-2 ring-secondary' : ''
                 }`}
                 initial={{ opacity: 0, y: 30 }}
@@ -463,6 +475,35 @@ const Index = () => {
                 </motion.div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Logos */}
+      <section className="section-padding bg-card">
+        <div className="container mx-auto">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Clients</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">We've Worked With</h2>
+          </motion.div>
+
+          <div className="opacity-80 overflow-hidden">
+            <LogoLoop
+              logos={clientLogos}
+              speed={80}
+              direction="left"
+              logoHeight={70}
+              gap={80}
+              pauseOnHover={true}
+              fadeOut={true}
+              fadeOutColor="#1e1e2e"
+              ariaLabel="Client logos"
+            />
           </div>
         </div>
       </section>

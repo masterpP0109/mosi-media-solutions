@@ -44,6 +44,7 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
         initial="initial"
         animate="animate"
         exit="exit"
+        className="pt-16"
       >
         {children}
       </motion.div>

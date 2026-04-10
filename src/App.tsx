@@ -15,6 +15,7 @@ import Blogs from "./pages/Blogs";
 import Packages from "./pages/Packages";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import MosiExclusive from "./pages/MosiExclusive";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/mosi-exclusive" element={<MosiExclusive />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
