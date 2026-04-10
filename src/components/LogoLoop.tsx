@@ -91,7 +91,13 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
 
       if (seqSize > 0) {
         let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
-        nextOffset = ((nextOffset % seqSize) + seqSize) % seqSize;
+        
+        // For seamless loop, reset when we've scrolled exactly one sequence width
+        if (nextOffset >= seqWidth) {
+          nextOffset = nextOffset % seqWidth;
+        } else if (nextOffset < 0) {
+          nextOffset = seqWidth + (nextOffset % seqWidth);
+        }
         offsetRef.current = nextOffset;
 
         const transformValue = isVertical
