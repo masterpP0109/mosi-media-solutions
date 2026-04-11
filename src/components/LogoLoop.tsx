@@ -1,5 +1,36 @@
-import { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, memo, ReactNode, CSSProperties } from 'react';
 import './LogoLoop.css';
+
+interface LogoItem {
+  src?: string;
+  srcSet?: string;
+  sizes?: string;
+  width?: number | string;
+  height?: number | string;
+  alt?: string;
+  title?: string;
+  href?: string;
+  ariaLabel?: string;
+  node?: ReactNode;
+}
+
+interface LogoLoopProps {
+  logos: LogoItem[];
+  speed?: number;
+  direction?: 'left' | 'right' | 'up' | 'down';
+  width?: string | number;
+  logoHeight?: number;
+  gap?: number;
+  pauseOnHover?: boolean;
+  hoverSpeed?: number;
+  fadeOut?: boolean;
+  fadeOutColor?: string;
+  scaleOnHover?: boolean;
+  renderItem?: (item: LogoItem, key: string | number) => ReactNode;
+  ariaLabel?: string;
+  className?: string;
+  style?: CSSProperties;
+}
 
 const ANIMATION_CONFIG = { SMOOTH_TAU: 0.25, MIN_COPIES: 2, COPY_HEADROOM: 2 };
 
@@ -92,11 +123,11 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
       if (seqSize > 0) {
         let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
         
-        // For seamless loop, reset when we've scrolled exactly one sequence width
-        if (nextOffset >= seqWidth) {
-          nextOffset = nextOffset % seqWidth;
+        // For seamless loop, reset when we've scrolled exactly one sequence
+        if (nextOffset >= seqSize) {
+          nextOffset = nextOffset % seqSize;
         } else if (nextOffset < 0) {
-          nextOffset = seqWidth + (nextOffset % seqWidth);
+          nextOffset = seqSize + (nextOffset % seqSize);
         }
         offsetRef.current = nextOffset;
 
@@ -138,7 +169,7 @@ const LogoLoop = memo(
     ariaLabel = 'Partner logos',
     className,
     style
-  }) => {
+  }: LogoLoopProps) => {
     const containerRef = useRef(null);
     const trackRef = useRef(null);
     const seqRef = useRef(null);

@@ -113,7 +113,7 @@ const Blogs = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Blog</p>
-            <h1 className="font-heading text-4xl md:text-6xl font-bold mb-6" style={{ color: "hsl(0 0% 100%)" }}>
+            <h1 className="font-heading text-[40px] md:text-6xl font-[500] mb-6 text-transform capitalize" style={{ color: "#FFFFFF", textShadow: "5px 0px 8px #000000", lineHeight: "1.2em" }}>
               Insights & <span className="text-gradient-brand">Industry Updates</span>
             </h1>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: "hsl(220 20% 80%)" }}>
