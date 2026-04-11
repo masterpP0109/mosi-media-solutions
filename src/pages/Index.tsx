@@ -21,7 +21,7 @@ const Index = () => {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(139,0,0,0.15),transparent_50%),radial-gradient(ellipse_at_30%_70%,rgba(25,25,112,0.25),transparent_50%),#030508]" />
           <Aurora
-            colorStops={["#191970","#2F2F5F","#8B0000"]}
+            colorStops={["#050510","#161635","#8B0000"]}
             blend={0.85}
             amplitude={1.1}
             speed={1.3}
@@ -40,43 +40,64 @@ const Index = () => {
               glowIntensity={0.03}
             />
           </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-white/[0.05] pointer-events-none" />
+          <div className="absolute inset-0 border border-white/[0.06] rounded-[30%] pointer-events-none" />
         </div>
         
-        <div className="relative z-10 container mx-auto px-6">
-          <div className="max-w-4xl">
+        <div className="relative z-10 container mx-auto px-6 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Copy */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-4">Welcome to Mosi Media Solutions</p>
-              <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 leading-tight" style={{ color: "hsl(0 0% 100%)" }}>
-                Crafting <span className="text-gradient-brand">Unforgettable</span> Media Experiences
+              <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-4">Mosi Media Solutions</p>
+              <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 leading-tight text-white" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.5)" }}>
+                Where Vision Meets <span className="text-gradient-brand">High-Definition</span> Reality
               </h1>
-              <p className="text-xl md:text-2xl mb-8 max-w-2xl" style={{ color: "hsl(220 20% 80%)" }}>
-                Based in Victoria Falls, we deliver world-class multimedia solutions including video production, photography, event coverage, and digital marketing across Africa.
+              <p className="text-xl text-white/80 mb-8 max-w-xl leading-relaxed">
+                We don't just produce content; we craft immersive multimedia experiences that define your brand's legacy.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 neon-hover"
-                    style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)", boxShadow: "0 2px 12px rgba(139,0,0,0.35)" }}
-                  >
-                    Get Started
-                    <ArrowRight size={20} />
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link
-                    to="/portfolio"
-                    className="inline-flex items-center gap-2 border border-secondary px-6 py-3 rounded-full text-sm font-semibold text-secondary hover:bg-secondary/10 transition-all duration-300 neon-hover"
-                  >
-                    <Play size={20} />
-                    View Our Work
-                  </Link>
-                </motion.div>
+              <div className="flex flex-col sm:flex-row gap-6">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 btn-glow neon-hover"
+                  style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)", boxShadow: "0 4px 20px rgba(139,0,0,0.4)" }}
+                >
+                  Get a Quote
+                </Link>
+                <Link
+                  to="/portfolio"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-all duration-300 group"
+                >
+                  Explore Our Portfolio
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
+            </motion.div>
+
+            {/* Right Side - Media */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/20 to-accent/20 border border-white/[0.1]">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                    <Play size={32} className="text-white ml-1" />
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-white/90 text-sm font-medium">Video Production Reel</p>
+                </div>
+              </div>
+              {/* Parallax decoration */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
             </motion.div>
           </div>
         </div>
