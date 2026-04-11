@@ -51,12 +51,14 @@ const Index = () => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
+              className="relative"
             >
+              <div className="backdrop-blur-md bg-white/[0.05] rounded-2xl p-8 md:p-10">
               <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-4">Mosi Media Solutions</p>
               <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 leading-tight text-white" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.5)" }}>
                 Where Vision Meets <span className="text-gradient-brand">High-Definition</span> Reality
               </h1>
-              <p className="text-xl text-white/80 mb-8 max-w-xl leading-relaxed">
+              <p className="text-xl mb-8 max-w-xl leading-relaxed text-[#0a0a1a] font-medium">
                 We don't just produce content; we craft immersive multimedia experiences that define your brand's legacy.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
@@ -69,11 +71,12 @@ const Index = () => {
                 </Link>
                 <Link
                   to="/portfolio"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-all duration-300 group"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#0a0a1a] hover:text-[#191970] transition-all duration-300 group"
                 >
                   Explore Our Portfolio
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
+              </div>
               </div>
             </motion.div>
 
@@ -84,9 +87,9 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/20 to-accent/20 border border-white/[0.1]">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/10 to-accent/10">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center">
                     <Play size={32} className="text-white ml-1" />
                   </div>
                 </div>

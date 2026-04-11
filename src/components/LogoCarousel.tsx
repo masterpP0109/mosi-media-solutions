@@ -17,7 +17,7 @@ const LogoCarousel = () => {
 
     const width = el.scrollWidth / 2;
 
-    gsap.to(el, {
+    const tween = gsap.to(el, {
       x: `-=${width}`,
       duration: 20,
       ease: "none",
@@ -26,6 +26,10 @@ const LogoCarousel = () => {
         x: gsap.utils.unitize((x) => parseFloat(x) % width),
       },
     });
+
+    return () => {
+      tween.kill();
+    };
   }, []);
 
   const duplicatedLogos = [...clientLogos, ...clientLogos];
