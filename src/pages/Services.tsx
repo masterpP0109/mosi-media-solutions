@@ -127,7 +127,7 @@ const Services = () => {
                 </ul>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/contact" className="bg-gradient-red px-6 py-2.5 rounded-md text-sm font-semibold text-secondary-foreground hover:opacity-90 transition-opacity inline-block hover:bg-[#9B3030]" style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)" }}>
-                    Get a Quote
+                    Inquire
                   </Link>
                 </motion.div>
               </div>
