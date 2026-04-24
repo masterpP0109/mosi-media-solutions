@@ -137,8 +137,7 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="rounded-lg overflow-hidden shadow-xl">
-                <img src={aboutTeam} alt="Mosi Media team at work" loading="lazy" className="w-full h-auto object-cover" />
+              <div className="rounded-lg overflow-hidden shadow-xl image-hover-reveal">\n                <img src={aboutTeam} alt="Mosi Media team at work" loading="lazy" className="w-full h-auto object-cover interactive-image-soft" />
               </div>
             </motion.div>
           </div>
@@ -619,3 +618,4 @@ const Index = () => {
 };
 
 export default Index;
+
