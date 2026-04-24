@@ -67,7 +67,7 @@ const Portfolio = () => {
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Work</p>
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
-              <span className="text-gradient-brand">Portfolio</span>
+              <span className="text-white">Portfolio</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               A selection of our work across events, film, photography, and branding. Each project tells a unique story.

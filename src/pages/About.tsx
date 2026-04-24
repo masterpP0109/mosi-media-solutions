@@ -69,7 +69,7 @@ const About = () => {
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">About Us</p>
             <h1 className="font-heading text-[40px] md:text-6xl font-[500] mb-6 text-transform capitalize" style={{ color: "#FFFFFF", textShadow: "5px 0px 8px #000000", lineHeight: "1.2em" }}>
-              Your Full-Service <span className="text-gradient-brand">Multimedia Agency</span>
+              Your Full-Service <span className="text-white">Multimedia Agency</span>
             </h1>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: "hsl(220 20% 80%)" }}>
               Based in Victoria Falls, Zimbabwe — delivering world-class media, events, and communication solutions across Africa.
