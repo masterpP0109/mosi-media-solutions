@@ -67,7 +67,7 @@ const Index = () => {
                   className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 btn-glow neon-hover"
                   style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)", boxShadow: "0 4px 20px rgba(139,0,0,0.4)" }}
                 >
-                  Get a Quote
+                  Inquire
                 </Link>
                 <Link
                   to="/portfolio"
@@ -517,12 +517,12 @@ const Index = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-muted-foreground mb-4">Want to join our family of successful brands?</p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#CD5C5C] hover:text-[#8B0000] transition-all duration-300 neon-hover"
-            >
-              Add Your Company to Our Success Story <ArrowRight size={16} />
-            </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 btn-glow neon-hover" style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)", boxShadow: "0 4px 20px rgba(139,0,0,0.4)" }}
+                >
+                  Inquire
+                </Link>
           </motion.div>
         </div>
       </section>

@@ -102,7 +102,7 @@ const Navbar = () => {
             to="/contact"
             className="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs font-semibold text-white transition-all duration-300 btn-glow neon-hover" style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)", boxShadow: "0 2px 12px rgba(139,0,0,0.35)" }}
           >
-            Get a Quote
+            Inquire
           </Link>
         </div>
 
@@ -166,7 +166,7 @@ const Navbar = () => {
             Follow us on TikTok
           </a>
           <Link to="/contact" onClick={() => setIsOpen(false)} className="block text-center px-5 py-2.5 rounded-full text-sm font-semibold text-white neon-hover" style={{ background: "linear-gradient(135deg, #8B0000, #5C0000)" }}>
-            Get a Quote
+            Inquire
           </Link>
         </div>
       )}
