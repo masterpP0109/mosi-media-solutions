@@ -84,7 +84,7 @@ const Services = () => {
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Services</p>
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
-              End-to-End <span className="text-white">Media Solutions</span>
+              <span className="text-white">End-to-End</span> <span className="text-white">Media Solutions</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               From concept to execution, we deliver comprehensive multimedia services tailored to your vision. Every service under one roof.
@@ -105,7 +105,7 @@ const Services = () => {
               viewport={{ once: true }}
             >
               {service.image ? (
-                 <div className={`rounded-lg overflow-hidden shadow-lg ${idx % 2 === 1 ? "lg:order-2" : ""}`}>
+                 <div className={`rounded-lg overflow-hidden shadow-lg image-hover-reveal ${idx % 2 === 1 ? "lg:order-2" : ""}`}>
                    <img src={service.image} alt={service.title} loading="lazy" className="w-full h-80 object-cover transition-transform duration-500 hover:scale-105 hover:brightness-110" />
                  </div>
               ) : (

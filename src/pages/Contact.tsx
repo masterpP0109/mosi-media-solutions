@@ -55,7 +55,7 @@ const Contact = () => {
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Get In Touch</p>
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Let's Create Something <span className="text-white">Amazing</span>
+              <span className="text-white">Let's Create Something</span> <span className="text-white">Amazing</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Ready to start your project? Reach out and let's bring your vision to life.
@@ -169,3 +169,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

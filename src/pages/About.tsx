@@ -102,12 +102,12 @@ const About = () => {
               </p>
             </motion.div>
             <motion.div 
-              className="rounded-lg overflow-hidden shadow-xl"
+              className="rounded-lg overflow-hidden shadow-xl image-hover-reveal"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <img src={aboutTeam} alt="Mosi Media team at work" loading="lazy" width={1200} height={800} className="w-full h-auto object-cover" />
+              <img src={aboutTeam} alt="Mosi Media team at work" loading="lazy" width={1200} height={800} className="w-full h-auto object-cover interactive-image-soft" />
             </motion.div>
           </div>
         </div>
