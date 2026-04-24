@@ -3,20 +3,6 @@ import { motion } from "framer-motion";
 const GlassBackground = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Large faded logo in center */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.06 }}
-        transition={{ duration: 1.5 }}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      >
-        <img
-          src="/images/cropped-mms-fINAL1-WHITE.webp"
-          alt="Mosi Media Solutions"
-          className="w-[700px] h-auto rotate-12"
-        />
-      </motion.div>
-
       {/* Top left subtle gradient blob */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -70,33 +56,6 @@ const GlassBackground = () => {
         className="absolute top-1/2 right-10 w-[180px] h-[180px] rounded-full blur-[40px]"
         style={{ background: 'linear-gradient(135deg, #8B0000, #2F2F5F)' }}
       />
-
-      {/* Additional subtle logo repetitions */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.02 }}
-        transition={{ duration: 2, delay: 0.5 }}
-        className="absolute bottom-1/4 left-1/4"
-      >
-        <img
-          src="/images/cropped-mms-fINAL1-WHITE.webp"
-          alt=""
-          className="w-[300px] h-auto -rotate-6 opacity-50"
-        />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.02 }}
-        transition={{ duration: 2, delay: 0.7 }}
-        className="absolute top-1/3 right-1/4"
-      >
-        <img
-          src="/images/cropped-mms-fINAL1-WHITE.webp"
-          alt=""
-          className="w-[250px] h-auto rotate-45 opacity-40"
-        />
-      </motion.div>
     </div>
   );
 };
