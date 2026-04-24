@@ -38,7 +38,7 @@ const packages = [
     popular: true
   },
   {
-    name: "Mosi Exclusive",
+    name: "Mosi Special",
     price: "Ultimate Luxury",
     description: "The ultimate luxury elopement experience in Africa's adventure capital",
     features: [
@@ -70,7 +70,7 @@ const MosiExclusive = () => {
   return (
     <main>
       <Metadata
-        title="Mosi Exclusive Elopements | Victoria Falls Wedding Packages"
+         title="Mosi Special Elopements | Victoria Falls Wedding Packages"
         description="Experience the adventure of a lifetime with our exclusive Victoria Falls elopement packages. Intimate ceremonies, professional photography, and luxury accommodations in Africa's adventure capital."
         keywords="Victoria Falls elopement, wedding packages, intimate wedding, rain forest ceremony, luxury wedding Zimbabwe"
         ogUrl="https://mosimediasolutions.com/mosi-exclusive"
@@ -140,7 +140,7 @@ const MosiExclusive = () => {
         </div>
       </section>
 
-      {/* Why Choose Mosi Exclusive */}
+      {/* Why Choose Mosi Special */}
       <section className="section-padding bg-background">
         <div className="container mx-auto">
           <motion.div 
@@ -149,7 +149,7 @@ const MosiExclusive = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Why Mosi Exclusive</p>
+            <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Why Mosi Special</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Your Dream Elopement Awaits</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We specialize in creating intimate, personalized wedding experiences that celebrate your love story in one of the world's most breathtaking destinations.
@@ -258,7 +258,7 @@ const MosiExclusive = () => {
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Testimonials</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Love Stories</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Hear from couples who chose Mosi Exclusive for their special day.
+              Hear from couples who chose Mosi Special for their special day.
             </p>
           </motion.div>
 
@@ -277,7 +277,7 @@ const MosiExclusive = () => {
               {
                 name: "Lisa & Chen",
                 location: "Australia",
-                quote: "From the first email to the final goodbye, everything was handled with such care. Our Mosi Exclusive package exceeded all our expectations!"
+                quote: "From the first email to the final goodbye, everything was handled with such care. Our Mosi Special package exceeded all our expectations!"
               }
             ].map((testimonial, index) => (
               <motion.div

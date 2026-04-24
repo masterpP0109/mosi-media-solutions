@@ -135,7 +135,7 @@ const Contact = () => {
                       <option>Digital Screen Solutions</option>
                       <option>Audio Services</option>
                       <option>Marketing & Advertising</option>
-                      <option>Mosi Exclusive (Elopements)</option>
+                      <option>Mosi Special (Elopements)</option>
                       <option>Other (please specify)</option>
                     </select>
                   </div>
