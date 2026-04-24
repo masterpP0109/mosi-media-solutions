@@ -132,7 +132,7 @@ const Packages = () => {
             <h1 className="font-heading text-[40px] md:text-6xl font-[500] mb-6 text-transform capitalize" style={{ color: "#FFFFFF", textShadow: "5px 0px 8px #000000", lineHeight: "1.2em" }}>
               Choose Your <span className="text-white">Perfect Package</span>
             </h1>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: "hsl(220 20% 80%)" }}>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: "#FFFFFF" }}>
               Tailored multimedia solutions designed to help your business grow and succeed in the digital landscape.
             </p>
           </motion.div>
