@@ -8,7 +8,7 @@ import RippleGrid from "@/components/RippleGrid";
 const packages = [
   {
     name: "Rainforest Intimate",
-    price: "$2,500",
+    price: "Intimate Experience",
     description: "A magical ceremony in the heart of Victoria Falls Rainforest",
     features: [
       "Rainforest ceremony location",
@@ -23,7 +23,7 @@ const packages = [
   },
   {
     name: "Sunset Romance",
-    price: "$4,500",
+    price: "Complete Experience",
     description: "The complete elopement experience with sunset views",
     features: [
       "All Rainforest Intimate features",
@@ -39,7 +39,7 @@ const packages = [
   },
   {
     name: "Mosi Exclusive",
-    price: "$7,500",
+    price: "Ultimate Luxury",
     description: "The ultimate luxury elopement experience in Africa's adventure capital",
     features: [
       "All Sunset Romance features",
