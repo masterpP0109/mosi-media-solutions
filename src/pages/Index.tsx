@@ -197,7 +197,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Mosi Exclusive */}
+      {/* Mosi Special */}
       <section className="section-padding bg-primary">
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -207,7 +207,7 @@ const Index = () => {
               transition={{ duration: 0.6 }}
             >
               <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Special Packages</p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6"><span className="text-gradient-brand">Mosi Exclusive</span> Elopements</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6"><span className="text-gradient-brand">Mosi Special</span> Elopements</h2>
               <p className="text-muted-foreground mb-6">
                 Experience the adventure of a lifetime with our exclusive Victoria Falls elopement packages. Say "I do" in one of the world's most breathtaking destinations.
               </p>
