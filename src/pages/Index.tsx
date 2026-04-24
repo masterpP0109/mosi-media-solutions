@@ -56,7 +56,7 @@ const Index = () => {
               <div className="backdrop-blur-md bg-white/[0.05] rounded-2xl p-8 md:p-10">
               <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-4">Mosi Media Solutions</p>
               <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 leading-tight text-white" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.5)" }}>
-                Where Vision Meets <span className="text-gradient-brand">High-Definition</span> Reality
+                Where Vision Meets <span className="text-white">High-Definition</span> Reality
               </h1>
               <p className="text-xl mb-8 max-w-xl leading-relaxed text-[#0a0a1a] font-medium">
                 We don't just produce content; we craft immersive multimedia experiences that define your brand's legacy.
@@ -207,7 +207,7 @@ const Index = () => {
               transition={{ duration: 0.6 }}
             >
               <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Special Packages</p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6"><span className="text-gradient-brand">Mosi Special</span> Elopements</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6"><span className="text-white">Mosi Special</span> Elopements</h2>
               <p className="text-muted-foreground mb-6">
                 Experience the adventure of a lifetime with our exclusive Victoria Falls elopement packages. Say "I do" in one of the world's most breathtaking destinations.
               </p>
