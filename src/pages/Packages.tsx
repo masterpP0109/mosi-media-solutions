@@ -8,7 +8,7 @@ import RippleGrid from "@/components/RippleGrid";
 const packages = [
   {
     name: "Starter Package",
-    price: "From $500",
+    price: "Small Business",
     description: "Perfect for small businesses and startups looking to establish their online presence.",
     features: [
       "Professional logo design",
@@ -23,7 +23,7 @@ const packages = [
   },
   {
     name: "Professional Package",
-    price: "From $1,500",
+    price: "Growing Business",
     description: "Comprehensive digital solution for growing businesses that need a strong brand presence.",
     features: [
       "Everything in Starter +",
@@ -41,7 +41,7 @@ const packages = [
   },
   {
     name: "Enterprise Package",
-    price: "From $3,500",
+    price: "Large Organization",
     description: "Full-service multimedia solution for established businesses and large organizations.",
     features: [
       "Everything in Professional +",
@@ -63,25 +63,25 @@ const packages = [
 const addOns = [
   {
     name: "Video Production Add-on",
-    price: "$800",
+    price: "Video Services",
     description: "Professional video content for your marketing campaigns",
     features: ["Script writing", "Professional filming", "Editing & post-production", "Multiple formats"]
   },
   {
     name: "Photography Session",
-    price: "$400",
+    price: "Photo Services",
     description: "High-quality professional photography for your brand",
     features: ["2-hour session", "20+ edited photos", "Commercial usage rights", "Online gallery"]
   },
   {
     name: "Social Media Management",
-    price: "$300/month",
+    price: "Monthly Service",
     description: "Complete social media strategy and content management",
     features: ["Content calendar", "Post creation", "Community management", "Monthly reports"]
   },
   {
     name: "SEO Optimization",
-    price: "$250/month",
+    price: "Ongoing Service",
     description: "Improve your search engine rankings and visibility",
     features: ["Keyword research", "On-page optimization", "Monthly reporting", "Technical SEO"]
   }
