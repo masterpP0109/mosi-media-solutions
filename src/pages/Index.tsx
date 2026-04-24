@@ -395,12 +395,12 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {[
-              { name: "Starter Package", price: "From $500", desc: "Perfect for small businesses", features: 6 },
-              { name: "Professional Package", price: "From $1,500", desc: "For growing businesses", popular: true, features: 9 },
-              { name: "Enterprise Package", price: "From $3,500", desc: "Full-service solution", features: 10 }
-            ].map((pkg, index) => (
+           <div className="grid md:grid-cols-3 gap-8 mb-12">
+             {[
+               { name: "Starter Package", price: "Small Business", desc: "Perfect for small businesses", features: 6 },
+               { name: "Professional Package", price: "Growing Business", desc: "For growing businesses", popular: true, features: 9 },
+               { name: "Enterprise Package", price: "Large Organization", desc: "Full-service solution", features: 10 }
+             ].map((pkg, index) => (
               <motion.div
                 key={pkg.name}
                 className={`relative bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all group min-h-[300px] ${
