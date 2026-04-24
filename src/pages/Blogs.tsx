@@ -114,7 +114,7 @@ const Blogs = () => {
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Blog</p>
             <h1 className="font-heading text-[40px] md:text-6xl font-[500] mb-6 text-transform capitalize" style={{ color: "#FFFFFF", textShadow: "5px 0px 8px #000000", lineHeight: "1.2em" }}>
-              Insights & <span className="text-gradient-brand">Industry Updates</span>
+              Insights & <span className="text-white">Industry Updates</span>
             </h1>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: "hsl(220 20% 80%)" }}>
               Stay ahead of the curve with our latest thoughts on multimedia, digital marketing, and creative solutions.

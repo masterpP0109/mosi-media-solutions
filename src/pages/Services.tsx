@@ -84,7 +84,7 @@ const Services = () => {
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Services</p>
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
-              End-to-End <span className="text-gradient-brand">Media Solutions</span>
+              End-to-End <span className="text-white">Media Solutions</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               From concept to execution, we deliver comprehensive multimedia services tailored to your vision. Every service under one roof.
