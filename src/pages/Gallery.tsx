@@ -6,12 +6,7 @@ import Metadata from "@/components/Metadata";
 import Aurora from "@/components/Aurora";
 import RippleGrid from "@/components/RippleGrid";
 import { SkeletonCard } from "@/components/Skeleton";
-import servicesVideo from "@/assets/services-video.jpg";
-import servicesPhoto from "@/assets/services-photo.jpg";
-import servicesAv from "@/assets/services-av.jpg";
-import servicesEvents from "@/assets/services-events.jpg";
-import aboutTeam from "@/assets/about-team.jpg";
-import heroBg from "@/assets/hero-bg.jpg";
+import { allGalleryImages, imageCategories } from "@/data/cloudinary-images";
 
 interface GalleryImage {
   id: number;
@@ -21,40 +16,28 @@ interface GalleryImage {
   size: "small" | "medium" | "large" | "wide" | "tall";
 }
 
+const iconComponents = {
+  Film,
+  Sparkles,
+  Camera,
+  Music
+};
+
 const categories = [
-  { name: "All", icon: Film },
-  { name: "Events", icon: Sparkles },
-  { name: "Video", icon: Film },
-  { name: "Photography", icon: Camera },
-  { name: "Creative", icon: Music },
+  { name: "All", icon: iconComponents.Film },
+  { name: "Events", icon: iconComponents.Sparkles },
+  { name: "Video", icon: iconComponents.Film },
+  { name: "Photography", icon: iconComponents.Camera },
+  { name: "Creative", icon: iconComponents.Music },
 ];
 
-const galleryImages: GalleryImage[] = [
-  { id: 1, title: "Moldon Campaign", category: "Video", image: servicesVideo, size: "large" },
-  { id: 2, title: "Product Launch", category: "Events", image: servicesEvents, size: "medium" },
-  { id: 3, title: "Wedding", category: "Photography", image: servicesPhoto, size: "small" },
-  { id: 4, title: "Brand Film", category: "Video", image: aboutTeam, size: "medium" },
-  { id: 5, title: "Elopement", category: "Events", image: heroBg, size: "small" },
-  { id: 6, title: "Hotel Promo", category: "Photography", image: servicesPhoto, size: "small" },
-  { id: 7, title: "Conference", category: "Events", image: servicesAv, size: "wide" },
-  { id: 8, title: "Product Shot", category: "Photography", image: servicesVideo, size: "medium" },
-  { id: 9, title: "Music Event", category: "Creative", image: servicesEvents, size: "small" },
-  { id: 10, title: "AV Setup", category: "Events", image: servicesAv, size: "small" },
-  { id: 11, title: "Safari Campaign", category: "Creative", image: heroBg, size: "large" },
-  { id: 12, title: "Team Photo", category: "Photography", image: aboutTeam, size: "medium" },
-  { id: 13, title: "Brand Identity", category: "Creative", image: servicesVideo, size: "small" },
-  { id: 14, title: "Reception", category: "Events", image: servicesEvents, size: "small" },
-  { id: 15, title: "Launch Event", category: "Video", image: servicesAv, size: "wide" },
-  { id: 16, title: "Landscape", category: "Photography", image: heroBg, size: "small" },
-  { id: 17, title: "Corporate", category: "Video", image: aboutTeam, size: "medium" },
-  { id: 18, title: "Studio", category: "Photography", image: servicesPhoto, size: "small" },
-  { id: 19, title: "Festival", category: "Events", image: servicesEvents, size: "wide" },
-  { id: 20, title: "Commercial", category: "Video", image: servicesVideo, size: "small" },
-  { id: 21, title: "Portfolio", category: "Photography", image: servicesPhoto, size: "medium" },
-  { id: 22, title: "Behind Scenes", category: "Creative", image: servicesAv, size: "small" },
-  { id: 23, title: "Destination", category: "Creative", image: heroBg, size: "small" },
-  { id: 24, title: "Team Building", category: "Photography", image: aboutTeam, size: "small" },
-];
+const galleryImages: GalleryImage[] = allGalleryImages.map(img => ({
+  id: img.id,
+  title: img.title,
+  category: img.category,
+  image: img.url,
+  size: img.size
+}));
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");

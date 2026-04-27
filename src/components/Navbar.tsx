@@ -8,6 +8,7 @@ const navItems = [
   { label: "Services", path: "/services" },
   { label: "Mosi Special", path: "/mosi-exclusive" },
   { label: "Portfolio", path: "/portfolio" },
+  { label: "Gallery", path: "/gallery" },
   { label: "Blogs", path: "/blogs" },
   { label: "Packages", path: "/packages" },
   { label: "Contact", path: "/contact" },
