@@ -7,8 +7,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/lib/page-transition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import GlassBackground from "@/components/GlassBackground";
 import Preloader from "@/components/Preloader";
+import ImageCarousel from "@/components/ImageCarousel";
+import WorkHistory from "@/components/WorkHistory";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -32,11 +33,29 @@ function App() {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <GlassBackground />
+          <ImageCarousel
+            images={[
+              { src: "/images/hero-bg.jpg", alt: "Hero Background" },
+              { src: "/images/services-photo.jpg", alt: "Services" },
+              { src: "/assets/about-team.jpg", alt: "About Team" },
+              { src: "/assets/services-av.jpg", alt: "Audio Visual" },
+              { src: "/assets/services-events.jpg", alt: "Events" },
+            ]}
+            autoPlay={true}
+            interval={4000}
+          />
           <Navbar />
           <PageTransition>
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Index />
+                    <WorkHistory />
+                  </>
+                }
+              />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/portfolio" element={<Portfolio />} />

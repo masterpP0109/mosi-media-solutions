@@ -1,4 +1,4 @@
-import { ArrowRight, Heart, Camera, Sparkles, Wine, MapPin, Check, Star } from "lucide-react";
+import { ArrowRight, Heart, Camera, Sparkles, Wine, MapPin, Check, Star, PartyPopper, Music } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Metadata from "@/components/Metadata";
@@ -7,8 +7,8 @@ import RippleGrid from "@/components/RippleGrid";
 
 const packages = [
   {
-    name: "Rainforest Intimate",
-    price: "Intimate Experience",
+    name: "Intimate Rainforest Ceremony",
+    price: "Romantic Experience",
     description: "A magical ceremony in the heart of Victoria Falls Rainforest",
     features: [
       "Rainforest ceremony location",
@@ -22,38 +22,48 @@ const packages = [
     popular: false
   },
   {
-    name: "Sunset Romance",
-    price: "Complete Experience",
-    description: "The complete elopement experience with sunset views",
+    name: "Corporate Functions",
+    price: "Professional Events",
+    description: "Conferences, galas, awards evenings, product launches, and team buildings",
     features: [
-      "All Rainforest Intimate features",
-      "Professional videographer (full day)",
-      "Wedding video highlight reel",
-      "Luxury sunset cruise",
-      "Couples spa treatment",
-      "Professional hair & makeup",
-      "3 nights luxury accommodation",
-      "Private photographer for full day"
+      "Full venue setup & styling",
+      "Professional AV equipment & lighting",
+      "Conference organization & scheduling",
+      "Gala & awards evening production",
+      "Year-end function planning",
+      "Product launch event management",
+      "Team building activities coordination",
+      "Professional photography & videography",
+      "Catering & bar services",
+      "Live entertainment booking",
+      "Guest accommodation coordination",
+      "Transport & logistics management",
+      "Branded staging & signage",
+      "Dedicated event coordinator"
     ],
-    popular: true
+    popular: false
   },
   {
-    name: "Mosi Special",
-    price: "Ultimate Luxury",
-    description: "The ultimate luxury elopement experience in Africa's adventure capital",
+    name: "Weddings & Functions",
+    price: "Complete Celebration",
+    description: "Intimate ceremonies, vow renewals, engagements, and anniversaries in paradise",
     features: [
       "All Sunset Romance features",
       "Helicopter sunset flight for two",
-      "Private island ceremony",
+      "Private island ceremony option",
       "Full-day professional photo & video team",
       "Reception dinner with private chef",
       "Live music entertainment",
       "5 nights luxury lodge accommodation",
       "Private safari experience",
       "Dedicated wedding coordinator",
-      "All-inclusive airport transfers"
+      "All-inclusive airport transfers",
+      "Professional hair & makeup artist",
+      "Wedding cake & catering services",
+      "Ceremony arch & floral arrangements",
+      "Guest accommodation coordination"
     ],
-    popular: false
+    popular: true
   }
 ];
 
@@ -63,18 +73,20 @@ const inclusions = [
   { icon: Heart, title: "Romantic Touches", desc: "Champagne, flowers, and personal touches included" },
   { icon: MapPin, title: "Stunning Locations", desc: "Rainforest, river, or sunset viewpoints" },
   { icon: Wine, title: "Fine Dining", desc: "Romantic dinners at premium Victoria Falls restaurants" },
-  { icon: Star, title: "Luxury Accommodation", desc: "Stay at award-winning lodges and hotels" }
+  { icon: Star, title: "Luxury Accommodation", desc: "Stay at award-winning lodges and hotels" },
+  { icon: PartyPopper, title: "Weddings and Celebrations", desc: "Complete coordination for your weddings, vow renewals, anniversaries, and corporate functions" },
+  { icon: PartyPopper, title: "Vow Renewals & Anniversaries", desc: "Celebrate your love story with magical ceremonies" },
 ];
 
 const MosiExclusive = () => {
   return (
-    <main>
-      <Metadata
-         title="Mosi Special Elopements | Victoria Falls Wedding Packages"
-        description="Experience the adventure of a lifetime with our exclusive Victoria Falls elopement packages. Intimate ceremonies, professional photography, and luxury accommodations in Africa's adventure capital."
-        keywords="Victoria Falls elopement, wedding packages, intimate wedding, rain forest ceremony, luxury wedding Zimbabwe"
-        ogUrl="https://mosimediasolutions.com/mosi-exclusive"
-      />
+  <main>
+    <Metadata
+       title="Mosi Special Elopements | Victoria Falls Wedding Packages"
+      description="Experience the adventure of a lifetime with our exclusive Victoria Falls elopement packages. Intimate ceremonies, vow renewals, engagement parties, anniversaries, and luxury weddings in Africa's adventure capital."
+      keywords="Victoria Falls elopement, wedding packages, intimate wedding, vow renewal, engagement party, anniversary celebration, luxury wedding Zimbabwe, rainforest ceremony"
+      ogUrl="https://mosimediasolutions.com/mosi-exclusive"
+    />
 
       {/* Hero */}
       <section className="relative min-h-[70vh] flex items-center overflow-hidden">
@@ -112,10 +124,9 @@ const MosiExclusive = () => {
             <h1 className="font-heading text-[40px] md:text-6xl font-[500] mb-6 text-transform capitalize" style={{ color: "#FFFFFF", textShadow: "5px 0px 8px #000000", lineHeight: "1.2em" }}>
               Say "I Do" in <span className="text-white">Paradise</span>
             </h1>
-            <p className="text-lg max-w-2xl mx-auto mb-8" style={{ color: "hsl(220 20% 80%)" }}>
-              Create unforgettable memories with our bespoke elopement experience in Africa's adventure capital. 
-              Intimate ceremonies, stunning locations, and world-class service await.
-            </p>
+      <p className="text-lg max-w-2xl mx-auto mb-8" style={{ color: "hsl(220 20% 80%)" }}>
+        From intimate elopements to large corporate functions, we create unforgettable experiences in Africa's adventure capital. Weddings, vow renewals, galas, and conferences await.
+      </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
@@ -186,9 +197,9 @@ const MosiExclusive = () => {
           >
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Packages</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Choose Your Perfect Package</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              From intimate rainforest ceremonies to complete luxury experiences, we have the perfect elopement package for you.
-            </p>
+           <p className="text-muted-foreground max-w-2xl mx-auto">
+               From intimate rainforest ceremonies to large corporate conferences, we offer the perfect event packages for your special occasions.
+           </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-8">
@@ -258,7 +269,7 @@ const MosiExclusive = () => {
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Testimonials</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Love Stories</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Hear from couples who chose Mosi Special for their special day.
+              Hear from couples who chose Mosi Special for their weddings, vow renewals, anniversaries, and corporate functions.
             </p>
           </motion.div>
 

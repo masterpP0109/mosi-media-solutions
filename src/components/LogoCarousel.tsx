@@ -1,11 +1,31 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 const clientLogos = [
-  { src: "/images/clientsLogos/moldon.webp", alt: "Moldon Marketing" },
-  { src: "/images/clientsLogos/falls-hotel.webp", alt: "Victoria Falls Hotel" },
-  { src: "/images/clientsLogos/stanbic.webp", alt: "Stanbic Bank" },
-  { src: "/images/clientsLogos/zb1.webp", alt: "ZB Bank" },
-  { src: "/images/clientsLogos/logistics.webp", alt: "Logistics Company" },
+  { 
+    src: "/images/clientsLogos/moldon.webp", 
+    alt: "Moldon Marketing",
+    url: "https://moldon.com" 
+  },
+  { 
+    src: "/images/clientsLogos/falls-hotel.webp", 
+    alt: "Victoria Falls Hotel",
+    url: "https://www.victoriafallshotel.com/" 
+  },
+  { 
+    src: "/images/clientsLogos/stanbic.webp", 
+    alt: "Stanbic Bank",
+    url: "https://www.stanbic.co.zw/" 
+  },
+  { 
+    src: "/images/clientsLogos/zb1.webp", 
+    alt: "ZB Bank",
+    url: "https://www.zb.co.zw/" 
+  },
+  { 
+    src: "/images/clientsLogos/logistics.webp", 
+    alt: "Logistics Company",
+    url: "https://lrtin.com/" 
+  },
 ];
 
 const LogoCarousel = () => {
@@ -38,12 +58,20 @@ const LogoCarousel = () => {
     <div className="overflow-hidden w-full">
       <div ref={trackRef} className="flex gap-20 w-max">
         {duplicatedLogos.map((logo, i) => (
-          <img
+          <a
             key={i}
-            src={logo.src}
-            alt={logo.alt}
-            className="h-28 object-contain rounded-full"
-          />
+            href={logo.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+            aria-label={`Visit ${logo.alt}`}
+          >
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              className="h-28 object-contain rounded-full transition-all duration-300 hover:scale-110 hover:filter hover:brightness-110 hover:drop-shadow-lg"
+            />
+          </a>
         ))}
       </div>
     </div>

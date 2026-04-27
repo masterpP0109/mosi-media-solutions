@@ -1,0 +1,41 @@
+.moving-background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -3;
+}
+
+.moving-track {
+  display: flex;
+  width: fit-content;
+  height: 100%;
+  animation: slide-left 60s linear infinite;
+}
+
+.moving-track img {
+  height: 100vh;
+  width: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+  filter: blur(2px);
+  opacity: 0.5;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .moving-track {
+    animation: none;
+  }
+}

@@ -13,7 +13,7 @@ const Footer = () => {
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
               Zimbabwe's premier multimedia agency delivering end-to-end media solutions from Victoria Falls to the world.
             </p>
-            <div className="flex gap-3 mt-5">
+             <div className="flex gap-3 mt-5">
               <a href="https://www.facebook.com/people/Mosi-Media-Solutions/61578099236920/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/70 hover:text-secondary hover:bg-primary-foreground/20 transition-colors" aria-label="Follow us on Facebook">
                 <Facebook size={16} />
               </a>
@@ -25,6 +25,11 @@ const Footer = () => {
               </a>
               <a href="#" className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/70 hover:text-secondary hover:bg-primary-foreground/20 transition-colors" aria-label="Subscribe to our YouTube">
                 <Youtube size={16} />
+              </a>
+              <a href="https://www.zb.co.zw/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-amber-600/90 flex items-center justify-center text-white hover:bg-amber-700 transition-colors" aria-label="Previous employer: ZB Bank" title="ZB Bank - Previous Employer">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
               </a>
             </div>
           </div>
