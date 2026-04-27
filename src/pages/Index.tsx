@@ -1,15 +1,18 @@
 import { ArrowRight, Play, Star, MapPin, Mail, Phone, Heart, Camera, Sparkles, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Metadata from "@/components/Metadata";
-import Aurora from "@/components/Aurora";
-import RippleGrid from "@/components/RippleGrid";
 import LogoCarousel from "@/components/LogoCarousel";
 import { getRandomImage, DatabaseImage } from "@/hooks/useDatabaseImages";
+import { useGalleryData } from "@/hooks/useGalleryData";
 
 const Index = () => {
   const [aboutImage, setAboutImage] = useState<DatabaseImage | null>(null);
+  const [carouselImages, setCarouselImages] = useState<DatabaseImage[]>([]);
+  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
+
+  const { images } = useGalleryData();
 
   useEffect(() => {
     const loadAboutImage = async () => {
@@ -21,6 +24,25 @@ const Index = () => {
     loadAboutImage();
   }, []);
 
+  // Set up 5-image carousel from backend
+  useEffect(() => {
+    if (images.length > 0) {
+      // Take first 5 images for carousel
+      const selectedImages = images.slice(0, 5);
+      setCarouselImages(selectedImages);
+    }
+  }, [images]);
+
+  // Rotate carousel images every 5 seconds
+  useEffect(() => {
+    if (carouselImages.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentCarouselIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [carouselImages]);
+
   return (
     <main>
       <Metadata
@@ -31,31 +53,41 @@ const Index = () => {
 
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Carousel Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(139,0,0,0.15),transparent_50%),radial-gradient(ellipse_at_30%_70%,rgba(25,25,112,0.25),transparent_50%),#030508]" />
-          <Aurora
-            colorStops={["#050510","#161635","#8B0000"]}
-            blend={0.85}
-            amplitude={1.1}
-            speed={1.3}
-          />
-          <div className="absolute inset-0">
-            <RippleGrid
-              enableRainbow={false}
-              gridColor="#8B0000"
-              rippleIntensity={0.015}
-              gridSize={10}
-              gridThickness={8}
-              mouseInteraction={true}
-              mouseInteractionRadius={1.8}
-              opacity={0.2}
-              vignetteStrength={1.2}
-              glowIntensity={0.03}
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-white/[0.05] pointer-events-none" />
-          <div className="absolute inset-0 border border-white/[0.06] rounded-[30%] pointer-events-none" />
+          {carouselImages.length > 0 && (
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentCarouselIndex}
+                src={carouselImages[currentCarouselIndex].url}
+                alt={carouselImages[currentCarouselIndex].title}
+                className="w-full h-full object-cover object-center"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 1 }}
+              />
+            </AnimatePresence>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
         </div>
+        
+        {/* Carousel Indicators */}
+        {carouselImages.length > 0 && (
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+            {carouselImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentCarouselIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentCarouselIndex 
+                    ? "bg-white w-8" 
+                    : "bg-white/50 hover:bg-white/75"
+                }`}
+              />
+            ))}
+          </div>
+        )}
         
         <div className="relative z-10 container mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
