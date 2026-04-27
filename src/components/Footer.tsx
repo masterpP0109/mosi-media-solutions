@@ -69,8 +69,8 @@ const Footer = () => {
               <a href="mailto:info@mosimediasolutions.com" className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
                 <Mail size={14} /> info@mosimediasolutions.com
               </a>
-              <a href="tel:+263771234567" className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
-                <Phone size={14} /> +263 77 123 4567
+              <a href="tel:+263788111391" className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
+                <Phone size={14} /> +263 78 811 1391
               </a>
               <span className="flex items-center gap-2 text-sm text-primary-foreground/70">
                 <MapPin size={14} /> Victoria Falls, Zimbabwe

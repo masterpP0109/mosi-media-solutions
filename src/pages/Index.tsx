@@ -450,16 +450,33 @@ const Index = () => {
             <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Pricing</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Our Packages</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose from our carefully crafted packages or let us create a custom solution for your needs.
+              Choose from our carefully crafted Service Packages or let us create a custom solution that perfectly fits your needs.
             </p>
           </motion.div>
 
            <div className="grid md:grid-cols-3 gap-8 mb-12">
              {[
-               { name: "Starter Package", price: "Small Business", desc: "Perfect for small businesses", features: 6 },
-               { name: "Professional Package", price: "Growing Business", desc: "For growing businesses", popular: true, features: 9 },
-               { name: "Enterprise Package", price: "Large Organization", desc: "Full-service solution", features: 10 }
-             ].map((pkg, index) => (
+                             {
+                name: "Video and Photography",
+                price: "Service Packages",
+                desc: "Video production, photography, editing, post-production",
+                features: 14,
+                popular: true
+              },
+              {
+                name: "Weddings and Engagement",
+                price: "Celebrations",
+                desc: "Weddings, vow renewals, engagement parties, anniversaries",
+                features: 8,
+                popular: false
+              },
+              {
+                name: "Corporate Events",
+                price: "Brand Solutions",
+                desc: "Gigs, live shows, product launches, corporate entertainment",
+                features: 9,
+                popular: false
+              }].map((pkg, index) => (
               <motion.div
                 key={pkg.name}
                 className={`relative bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all group min-h-[300px] ${

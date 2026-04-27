@@ -73,9 +73,12 @@ const inclusions = [
   { icon: Heart, title: "Romantic Touches", desc: "Champagne, flowers, and personal touches included" },
   { icon: MapPin, title: "Stunning Locations", desc: "Rainforest, river, or sunset viewpoints" },
   { icon: Wine, title: "Fine Dining", desc: "Romantic dinners at premium Victoria Falls restaurants" },
-  { icon: Star, title: "Luxury Accommodation", desc: "Stay at award-winning lodges and hotels" },
-  { icon: PartyPopper, title: "Weddings and Celebrations", desc: "Complete coordination for your weddings, vow renewals, anniversaries, and corporate functions" },
-  { icon: PartyPopper, title: "Vow Renewals & Anniversaries", desc: "Celebrate your love story with magical ceremonies" },
+  {
+    icon: Star, title: "Luxury Accommodation", desc: "Stay at award-winning lodges and hotels"
+  },
+  {
+    icon: PartyPopper, title: "Weddings and Celebrations", desc: "Complete coordination for your weddings, vow renewals, anniversaries, and corporate functions"
+  }
 ];
 
 const MosiExclusive = () => {

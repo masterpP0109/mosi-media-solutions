@@ -18,7 +18,7 @@ const Contact = () => {
     <main className="pt-16">
       <Metadata
         title="Contact Mosi Media Solutions - Get in Touch for Your Multimedia Project"
-        description="Contact Mosi Media Solutions for professional multimedia services. Located in Victoria Falls, Zimbabwe. Email: info@mosimediasolutions.com | Phone: +263 77 123 4567"
+        description="Contact Mosi Media Solutions for professional multimedia services. Located in Victoria Falls, Zimbabwe. Email: info@mosimediasolutions.com | Phone: +263 78 811 1391"
         keywords="contact, multimedia agency, Victoria Falls, Zimbabwe, email, phone"
         ogUrl="https://mosimediasolutions.com/contact"
       />
@@ -74,11 +74,11 @@ const Contact = () => {
               transition={{ duration: 0.5 }}
             >
               {[
-                { icon: Mail, label: "Email", value: "info@mosimediasolutions.com", href: "mailto:info@mosimediasolutions.com" },
-                { icon: Phone, label: "Phone", value: "+263 77 123 4567", href: "tel:+263771234567" },
-                { icon: MapPin, label: "Location", value: "Victoria Falls, Zimbabwe" },
-                { icon: Clock, label: "Hours", value: "Mon – Sat: 8am – 6pm" },
-                { icon: MessageSquare, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/263771234567" },
+                 { icon: Mail, label: "Email", value: "info@mosimediasolutions.com", href: "mailto:info@mosimediasolutions.com" },
+                 { icon: Phone, label: "Phone", value: "+263 78 811 1391", href: "tel:+263788111391" },
+                 { icon: MapPin, label: "Location", value: "Victoria Falls, Zimbabwe" },
+                 { icon: Clock, label: "Hours", value: "Mon – Sat: 8am – 6pm" },
+                 { icon: MessageSquare, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/263788111391" },
               ].map((item, index) => (
                 <motion.div 
                   key={item.label} 
