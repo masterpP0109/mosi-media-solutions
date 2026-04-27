@@ -1,13 +1,26 @@
 import { ArrowRight, Play, Star, MapPin, Mail, Phone, Heart, Camera, Sparkles, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Metadata from "@/components/Metadata";
 import Aurora from "@/components/Aurora";
 import RippleGrid from "@/components/RippleGrid";
 import LogoCarousel from "@/components/LogoCarousel";
-import aboutTeam from "@/assets/about-team.jpg";
+import { getRandomImage, DatabaseImage } from "@/hooks/useDatabaseImages";
 
 const Index = () => {
+  const [aboutImage, setAboutImage] = useState<DatabaseImage | null>(null);
+
+  useEffect(() => {
+    const loadAboutImage = async () => {
+      const image = await getRandomImage('other'); // Use 'other' category for about section
+      if (image) {
+        setAboutImage(image);
+      }
+    };
+    loadAboutImage();
+  }, []);
+
   return (
     <main>
       <Metadata
@@ -137,7 +150,22 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="rounded-lg overflow-hidden shadow-xl image-hover-reveal">\n                <img src={aboutTeam} alt="Mosi Media team at work" loading="lazy" className="w-full h-auto object-cover interactive-image-soft" />
+              <div className="rounded-lg overflow-hidden shadow-xl image-hover-reveal">
+                {aboutImage ? (
+                  <img 
+                    src={aboutImage.url} 
+                    alt={aboutImage.title || "Mosi Media team at work"} 
+                    loading="lazy" 
+                    className="w-full h-auto object-cover interactive-image-soft" 
+                  />
+                ) : (
+                  <div className="w-full h-64 bg-muted animate-pulse flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-12 h-12 mx-auto mb-3 border-2 border-muted-foreground/20 rounded-lg animate-pulse" />
+                      <p className="text-sm text-muted-foreground">Loading gallery image...</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>

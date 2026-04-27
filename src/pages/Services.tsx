@@ -1,48 +1,94 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Camera, Film, Monitor, Music, Sparkles, TrendingUp, CheckCircle } from "lucide-react";
 import Metadata from "@/components/Metadata";
 import Aurora from "@/components/Aurora";
 import RippleGrid from "@/components/RippleGrid";
-import servicesVideo from "@/assets/services-video.jpg";
-import servicesPhoto from "@/assets/services-photo.jpg";
-import servicesAv from "@/assets/services-av.jpg";
-import servicesEvents from "@/assets/services-events.jpg";
+import { getRandomImages, DatabaseImage } from "@/hooks/useDatabaseImages";
 
-const services = [
-  {
-    icon: Film, title: "Film & Video Production", image: servicesVideo,
-    description: "From corporate documentaries to promotional content, live streaming, and podcasts — we produce high-quality video that tells your story with cinematic precision.",
-    features: ["Corporate videos & documentaries", "Event coverage & live streaming", "Promotional & social media content", "Podcast production", "Music videos & short films"],
-  },
-  {
-    icon: Camera, title: "Professional Photography", image: servicesPhoto,
-    description: "Expert photography services delivering sharp, well-composed images that preserve moments and strengthen brand identity.",
-    features: ["Wedding & portrait photography", "Corporate & event photography", "Product & food photography", "Fashion & editorial shoots", "Real estate & architectural"],
-  },
-  {
-    icon: Sparkles, title: "Events Management", image: servicesEvents,
-    description: "End-to-end event production for conferences, weddings, board meetings, school events, and brand launches.",
-    features: ["Corporate conferences & galas", "Wedding planning & coordination", "360° booth experiences", "Special effects & cold sparks", "Décor & stage design"],
-  },
-  {
-    icon: Monitor, title: "Digital Screen Solutions", image: servicesAv,
-    description: "LED screens, interactive displays, and projection mapping that transform any venue into an immersive visual experience.",
-    features: ["LED screen rental & setup", "Interactive touch displays", "Projection mapping", "Digital signage solutions", "Video walls"],
-  },
-  {
-    icon: Music, title: "Professional Audio Services",
-    description: "Crystal-clear sound for any venue — from intimate meetings to large-scale outdoor events.",
-    features: ["PA system rental & setup", "Wireless microphone systems", "Live audio mixing", "Studio recording", "Conference audio solutions"],
-  },
-  {
-    icon: TrendingUp, title: "Marketing & Advertising",
-    description: "Strategic campaigns that drive visibility, engagement, and measurable growth for your brand.",
-    features: ["Social media campaigns", "Brand strategy & positioning", "Content marketing", "Digital advertising", "Influencer partnerships"],
-  },
-];
+interface Service {
+  icon: any;
+  title: string;
+  image: DatabaseImage | null;
+  description: string;
+  features: string[];
+}
 
 const Services = () => {
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        setLoading(true);
+        
+        // Get images for different service categories
+        const [videoImages, photoImages, eventsImages, avImages] = await Promise.all([
+          getRandomImages(1, 'video'),
+          getRandomImages(1, 'photography'),
+          getRandomImages(1, 'events'),
+          getRandomImages(1, 'other')
+        ]);
+
+        const servicesData: Service[] = [
+          {
+            icon: Film, title: "Film & Video Production", image: videoImages[0] || null,
+            description: "From corporate documentaries to promotional content, live streaming, and podcasts — we produce high-quality video that tells your story with cinematic precision.",
+            features: ["Corporate videos & documentaries", "Event coverage & live streaming", "Promotional & social media content", "Podcast production", "Music videos & short films"],
+          },
+          {
+            icon: Camera, title: "Professional Photography", image: photoImages[0] || null,
+            description: "Expert photography services delivering sharp, well-composed images that preserve moments and strengthen brand identity.",
+            features: ["Wedding & portrait photography", "Corporate & event photography", "Product & food photography", "Fashion & editorial shoots", "Real estate & architectural"],
+          },
+          {
+            icon: Sparkles, title: "Events Management", image: eventsImages[0] || null,
+            description: "End-to-end event production for conferences, weddings, board meetings, school events, and brand launches.",
+            features: ["Corporate conferences & galas", "Wedding planning & coordination", "360° booth experiences", "Special effects & cold sparks", "Décor & stage design"],
+          },
+          {
+            icon: Monitor, title: "Digital Screen Solutions", image: avImages[0] || null,
+            description: "LED screens, interactive displays, and projection mapping that transform any venue into an immersive visual experience.",
+            features: ["LED screen rental & setup", "Interactive touch displays", "Projection mapping", "Digital signage solutions", "Video walls"],
+          },
+          {
+            icon: Music, title: "Professional Audio Services", image: null,
+            description: "Crystal-clear sound for any venue — from intimate meetings to large-scale outdoor events.",
+            features: ["PA system rental & setup", "Wireless microphone systems", "Live audio mixing", "Studio recording", "Conference audio solutions"],
+          },
+          {
+            icon: TrendingUp, title: "Marketing & Advertising", image: null,
+            description: "Strategic campaigns that drive visibility, engagement, and measurable growth for your brand.",
+            features: ["Social media campaigns", "Brand strategy & positioning", "Content marketing", "Digital advertising", "Influencer partnerships"],
+          },
+        ];
+
+        setServices(servicesData);
+      } catch (error) {
+        console.error('Error loading services:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadServices();
+  }, []);
+
+  if (loading) {
+    return (
+      <main>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-pulse text-center">
+            <Camera className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+            <p className="text-muted-foreground">Loading services...</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main>
       <Metadata
@@ -106,7 +152,12 @@ const Services = () => {
             >
               {service.image ? (
                  <div className={`rounded-lg overflow-hidden shadow-lg image-hover-reveal ${idx % 2 === 1 ? "lg:order-2" : ""}`}>
-                   <img src={service.image} alt={service.title} loading="lazy" className="w-full h-80 object-cover transition-transform duration-500 hover:scale-105 hover:brightness-110" />
+                   <img 
+                     src={service.image.url} 
+                     alt={service.image.title || service.title} 
+                     loading="lazy" 
+                     className="w-full h-80 object-cover transition-transform duration-500 hover:scale-105 hover:brightness-110" 
+                   />
                  </div>
               ) : (
                 <div className={`rounded-lg bg-card border border-border h-80 flex items-center justify-center ${idx % 2 === 1 ? "lg:order-2" : ""}`}>

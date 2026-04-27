@@ -1,29 +1,89 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Camera } from "lucide-react";
 import Metadata from "@/components/Metadata";
 import Aurora from "@/components/Aurora";
 import RippleGrid from "@/components/RippleGrid";
-import servicesVideo from "@/assets/services-video.jpg";
-import servicesPhoto from "@/assets/services-photo.jpg";
-import servicesAv from "@/assets/services-av.jpg";
-import servicesEvents from "@/assets/services-events.jpg";
-import aboutTeam from "@/assets/about-team.jpg";
-import heroBg from "@/assets/hero-bg.jpg";
+import { getRandomImages, DatabaseImage } from "@/hooks/useDatabaseImages";
 
 const categories = ["All", "Events", "Video", "Photography", "Corporate"];
 
-const projects = [
-  { title: "Moldon Marketing Product Campaign", category: "Corporate", image: servicesVideo, description: "Full video production and photography for Moldon Marketing's product range." },
-  { title: "Afdis Hunters 660ml Product Launch", category: "Events", image: servicesEvents, description: "Event management and media coverage for African Distillers' product launch." },
-  { title: "Kings Primary Speech & Prize Giving", category: "Events", image: servicesAv, description: "AV setup, photography, and live streaming for the annual school event." },
-  { title: "Victoria Falls Destination Wedding", category: "Photography", image: servicesPhoto, description: "Intimate elopement photography in the Victoria Falls Rainforest." },
-  { title: "Corporate Brand Film — ZB Bank", category: "Video", image: aboutTeam, description: "Cinematic brand film showcasing ZB Bank's community impact." },
-  { title: "Tourism Victoria Falls Campaign", category: "Corporate", image: heroBg, description: "Destination marketing campaign for Victoria Falls tourism board." },
-];
+interface Project {
+  title: string;
+  category: string;
+  image: DatabaseImage | null;
+  description: string;
+}
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        setLoading(true);
+        
+        // Get images for different categories
+        const [corporateImages, eventsImages, videoImages, photoImages] = await Promise.all([
+          getRandomImages(2, 'other'),
+          getRandomImages(2, 'events'),
+          getRandomImages(2, 'video'),
+          getRandomImages(2, 'photography')
+        ]);
+
+        const projectData: Project[] = [
+          { 
+            title: "Moldon Marketing Product Campaign", 
+            category: "Corporate", 
+            image: corporateImages[0] || null, 
+            description: "Full video production and photography for Moldon Marketing's product range." 
+          },
+          { 
+            title: "Afdis Hunters 660ml Product Launch", 
+            category: "Events", 
+            image: eventsImages[0] || null, 
+            description: "Event management and media coverage for African Distillers' product launch." 
+          },
+          { 
+            title: "Kings Primary Speech & Prize Giving", 
+            category: "Events", 
+            image: eventsImages[1] || null, 
+            description: "AV setup, photography, and live streaming for the annual school event." 
+          },
+          { 
+            title: "Victoria Falls Destination Wedding", 
+            category: "Photography", 
+            image: photoImages[0] || null, 
+            description: "Intimate elopement photography in the Victoria Falls Rainforest." 
+          },
+          { 
+            title: "Corporate Brand Film — ZB Bank", 
+            category: "Video", 
+            image: videoImages[0] || null, 
+            description: "Cinematic brand film showcasing ZB Bank's community impact." 
+          },
+          { 
+            title: "Tourism Victoria Falls Campaign", 
+            category: "Corporate", 
+            image: corporateImages[1] || null, 
+            description: "Destination marketing campaign for Victoria Falls tourism board." 
+          },
+        ];
+
+        setProjects(projectData);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProjects();
+  }, []);
+
   const filtered = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
 
   return (
@@ -112,7 +172,21 @@ const Portfolio = () => {
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="h-56 overflow-hidden relative">
-                  <img src={project.image} alt={project.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  {project.image ? (
+                    <img 
+                      src={project.image.url} 
+                      alt={project.image.title || project.title} 
+                      loading="lazy" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted animate-pulse flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-8 h-8 mx-auto mb-2 border-2 border-muted-foreground/20 rounded-lg animate-pulse" />
+                        <p className="text-xs text-muted-foreground">Loading image...</p>
+                      </div>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-primary/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <span className="text-primary-foreground font-semibold text-sm border border-primary-foreground/30 px-4 py-2 rounded-md">View Project</span>
                   </div>

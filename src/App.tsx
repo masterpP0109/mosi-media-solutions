@@ -13,6 +13,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
+import Gallery from "./pages/Gallery";
 import Blogs from "./pages/Blogs";
 import Packages from "./pages/Packages";
 import Contact from "./pages/Contact";
@@ -39,6 +40,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/packages" element={<Packages />} />
               <Route path="/contact" element={<Contact />} />

@@ -1,4 +1,9 @@
-import { db } from './database';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://terzrbltzhtwiyronimk.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlcnpyYmx0emh0d2l5cm9uaW1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNDI0NjEsImV4cCI6MjA5MjgxODQ2MX0.H_BEvxZf9aHItEjybiBKzz5Pn26wbI1jkLUS6VPQp1U';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // API response types
 export interface ApiResponse<T = any> {
@@ -109,8 +114,13 @@ export class ApiService {
   // Services
   static async getServices(): Promise<ApiResponse<Service[]>> {
     try {
-      const services = await db.findAll('services', {}, 'sort_order ASC');
-      return { success: true, data: services };
+      const { data, error } = await supabase
+        .from('services')
+        .select('*')
+        .order('sort_order', { ascending: true });
+      
+      if (error) throw error;
+      return { success: true, data: data || [] };
     } catch (error) {
       return { success: false, error: 'Failed to fetch services' };
     }
@@ -118,14 +128,14 @@ export class ApiService {
 
   static async getServiceBySlug(slug: string): Promise<ApiResponse<Service>> {
     try {
-      const services = await db.findAll('services', { slug });
-      const service = services[0] || null;
-      if (service) {
-        // Get features for this service
-        const features = await db.findAll('service_features', { service_id: service.id }, 'sort_order ASC');
-        return { success: true, data: { ...service, features } };
-      }
-      return { success: false, error: 'Service not found' };
+      const { data, error } = await supabase
+        .from('services')
+        .select('*, service_features(*)')
+        .eq('slug', slug)
+        .single();
+      
+      if (error) throw error;
+      return { success: true, data: data };
     } catch (error) {
       return { success: false, error: 'Failed to fetch service' };
     }
@@ -134,12 +144,20 @@ export class ApiService {
   // Portfolio
   static async getPortfolioProjects(category?: string): Promise<ApiResponse<PortfolioProject[]>> {
     try {
-      const conditions: any = { published: true };
+      let query = supabase
+        .from('portfolio_projects')
+        .select('*')
+        .eq('published', true)
+        .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false });
+      
       if (category && category !== 'All') {
-        conditions.category = category;
+        query = query.eq('category', category);
       }
-      const projects = await db.findAll('portfolio_projects', conditions, 'sort_order ASC, created_at DESC');
-      return { success: true, data: projects };
+      
+      const { data, error } = await query;
+      if (error) throw error;
+      return { success: true, data: data || [] };
     } catch (error) {
       return { success: false, error: 'Failed to fetch portfolio projects' };
     }
@@ -147,14 +165,15 @@ export class ApiService {
 
   static async getPortfolioProjectBySlug(slug: string): Promise<ApiResponse<PortfolioProject>> {
     try {
-      const projects = await db.findAll('portfolio_projects', { slug, published: true });
-      const project = projects[0] || null;
-      if (project) {
-        // Get tags for this project
-        const tags = await db.findAll('project_tags', { project_id: project.id });
-        return { success: true, data: { ...project, tags } };
-      }
-      return { success: false, error: 'Project not found' };
+      const { data, error } = await supabase
+        .from('portfolio_projects')
+        .select('*, project_tags(*)')
+        .eq('slug', slug)
+        .eq('published', true)
+        .single();
+      
+      if (error) throw error;
+      return { success: true, data: data };
     } catch (error) {
       return { success: false, error: 'Failed to fetch project' };
     }
@@ -253,38 +272,52 @@ export class ApiService {
   // Team Members
   static async getTeamMembers(): Promise<ApiResponse<any[]>> {
     try {
-      const members = await db.findAll('team_members', { published: true }, 'sort_order ASC');
-      return { success: true, data: members };
+      const { data, error } = await supabase
+        .from('team_members')
+        .select('*')
+        .order('sort_order', { ascending: true });
+      
+      if (error) throw error;
+      return { success: true, data: data || [] };
     } catch (error) {
       return { success: false, error: 'Failed to fetch team members' };
     }
   }
 
-  // Testimonials
-  static async getTestimonials(featured?: boolean): Promise<ApiResponse<any[]>> {
+  // Cloudinary Images (for Gallery)
+  static async getGalleryImages(category?: string): Promise<ApiResponse<any[]>> {
     try {
-      const conditions: any = { published: true };
-      if (featured !== undefined) {
-        conditions.featured = featured;
+      let query = supabase
+        .from('cloudinary_images')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (category && category !== 'All') {
+        query = query.eq('category', category);
       }
-      const testimonials = await db.findAll('testimonials', conditions, 'sort_order ASC');
-      return { success: true, data: testimonials };
+      
+      const { data, error } = await query;
+      if (error) throw error;
+      return { success: true, data: data || [] };
     } catch (error) {
-      return { success: false, error: 'Failed to fetch testimonials' };
+      return { success: false, error: 'Failed to fetch gallery images' };
     }
   }
 
-  // Gallery
-  static async getGalleryImages(category?: string): Promise<ApiResponse<any[]>> {
+  // Get all image categories
+  static async getGalleryCategories(): Promise<ApiResponse<string[]>> {
     try {
-      const conditions: any = { published: true };
-      if (category) {
-        conditions.category = category;
-      }
-      const images = await db.findAll('gallery_images', conditions, 'sort_order ASC');
-      return { success: true, data: images };
+      const { data, error } = await supabase
+        .from('cloudinary_images')
+        .select('category')
+        .not('category', 'is', null);
+      
+      if (error) throw error;
+      
+      const categories = [...new Set(data?.map(item => item.category) || [])];
+      return { success: true, data: categories };
     } catch (error) {
-      return { success: false, error: 'Failed to fetch gallery images' };
+      return { success: false, error: 'Failed to fetch gallery categories' };
     }
   }
 }

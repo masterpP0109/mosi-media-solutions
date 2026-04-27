@@ -58,4 +58,4 @@ function SkeletonSection({ className }: { className?: string }) {
   );
 }
 
-export { Skeleton, SkeletonCard, SkeletonGrid, SkeletonText, SkeletonSection };
+export { SkeletonCard, SkeletonGrid, SkeletonText, SkeletonSection };
