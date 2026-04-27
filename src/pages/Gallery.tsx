@@ -28,20 +28,48 @@ const Gallery = () => {
     activeCategory === "All" ? undefined : activeCategory.toLowerCase()
   );
 
-  // Image rotation effect - change images within cards every 1 minute
+  // Image rotation effect - change images within cards every 30 seconds with more variety
   useEffect(() => {
     if (images.length > 0) {
-      // Show first 20 images initially with fixed card positions
-      const initialImages = images.slice(0, 20);
+      // Calculate how many cards we can display based on screen size
+      const calculateCardCount = () => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth < 640) return 6; // mobile
+        if (screenWidth < 768) return 8; // sm
+        if (screenWidth < 1024) return 12; // md
+        if (screenWidth < 1280) return 15; // lg
+        return 20; // xl and up
+      };
+      
+      const cardCount = calculateCardCount();
+      
+      // Show initial images
+      const initialImages = images.slice(0, Math.min(cardCount, images.length));
       setDisplayedImages(initialImages);
       
-      // Set up rotation interval - change images within same cards
+      // Set up rotation interval - rotate through ALL available images
       intervalRef.current = setInterval(() => {
-        // Get all available images and shuffle them
-        const shuffledImages = [...images].sort(() => 0.5 - Math.random());
-        const newImages = shuffledImages.slice(0, 20);
-        setDisplayedImages(newImages);
-      }, 60000); // Change every 1 minute (60,000 milliseconds)
+        setDisplayedImages(prevImages => {
+          // Get current image IDs to avoid duplicates
+          const currentIds = new Set(prevImages.map(img => img.id));
+          
+          // Get available images that aren't currently displayed
+          const availableImages = images.filter(img => !currentIds.has(img.id));
+          
+          if (availableImages.length >= cardCount) {
+            // If we have enough new images, show all new ones
+            const shuffled = [...availableImages].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, cardCount);
+          } else {
+            // If not enough new images, mix new with some old ones
+            const newImages = [...availableImages];
+            const neededMore = cardCount - availableImages.length;
+            const oldImages = images.filter(img => !newImages.includes(img))
+              .sort(() => 0.5 - Math.random()).slice(0, neededMore);
+            return [...newImages, ...oldImages];
+          }
+        });
+      }, 30000); // Change every 30 seconds for more variety
     }
     
     return () => {
@@ -211,84 +239,136 @@ const Gallery = () => {
             ))}
           </motion.div>
 
-          {/* Diverse Bento Grid Layout - Small Spacing */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 auto-rows-[300px]">
-            <AnimatePresence mode="popLayout">
-              {displayedImages.filter(image => activeCategory === "All" ? true : image.category === activeCategory.toLowerCase()).map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4, delay: index * 0.03 }}
-                  className={`
-                    group relative overflow-hidden cursor-pointer rounded-xl
-                    ${image.size === "small" ? "col-span-1 row-span-1" : ""}
-                    ${image.size === "medium" ? "col-span-2 row-span-1" : ""}
-                    ${image.size === "large" ? "col-span-2 row-span-2" : ""}
-                    ${image.size === "wide" ? "col-span-3 row-span-1" : ""}
-                    ${image.size === "tall" ? "col-span-1 row-span-2" : ""}
-                    ${image.size === "extraWide" ? "col-span-4 row-span-1" : ""}
-                    ${image.size === "extraTall" ? "col-span-1 row-span-3" : ""}
-                  `}
-                  onClick={() => setSelectedImage(image)}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                    <img 
-                      src={image.url} 
-                      alt={image.title} 
-                      loading="lazy"
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                      onError={(e) => {
-                        // Handle broken images by showing a fallback image from database
-                        const target = e.target as HTMLImageElement;
-                        if (fallbackImages.length > 0) {
-                          // Use a random fallback image
-                          const randomFallback = fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
-                          target.src = randomFallback.url;
-                          target.alt = randomFallback.title || 'Fallback image';
-                        } else {
-                          // If no fallback images available, show placeholder
-                          target.style.display = 'none';
-                          const parent = target.parentElement;
-                          if (parent) {
-                            parent.innerHTML = `
-                              <div class="w-full h-full flex items-center justify-center bg-muted">
-                                <div class="text-center">
-                                  <svg class="w-12 h-12 mx-auto mb-2 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                    <polyline points="21 15 16 10 5 21"></polyline>
-                                  </svg>
-                                  <p class="text-xs text-muted-foreground">Loading images...</p>
-                                </div>
-                              </div>
-                            `;
-                          }
-                        }
-                      }}
-                      onLoad={(e) => {
-                        // Ensure image is properly loaded and visible
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'block';
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-                        <ZoomIn size={20} className="text-white" />
+          {/* Responsive Bento Grid Layout - No White Space */}
+          <div className="w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1.5 auto-rows-[250px] min-h-[600px]">
+              <AnimatePresence mode="popLayout">
+                {displayedImages
+                  .filter(image => activeCategory === "All" ? true : image.category === activeCategory.toLowerCase())
+                  .map((image, index) => (
+                    <motion.div
+                      key={image.id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.4, delay: index * 0.02 }}
+                      className={`
+                        group relative overflow-hidden cursor-pointer rounded-lg
+                        ${image.size === "small" ? "col-span-1 row-span-1" : ""}
+                        ${image.size === "medium" ? "col-span-2 row-span-1" : ""}
+                        ${image.size === "large" ? "col-span-2 row-span-2" : ""}
+                        ${image.size === "wide" ? "col-span-3 row-span-1" : ""}
+                        ${image.size === "tall" ? "col-span-1 row-span-2" : ""}
+                        ${image.size === "extraWide" ? "col-span-4 row-span-1" : ""}
+                        ${image.size === "extraTall" ? "col-span-1 row-span-3" : ""}
+                      `}
+                      onClick={() => setSelectedImage(image)}
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="absolute inset-0 bg-muted">
+                        <img 
+                          src={image.url} 
+                          alt={image.title} 
+                          loading="lazy"
+                          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            if (fallbackImages.length > 0) {
+                              const randomFallback = fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
+                              target.src = randomFallback.url;
+                              target.alt = randomFallback.title || 'Fallback image';
+                            } else {
+                              target.style.display = 'none';
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `
+                                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-muted/80">
+                                    <div class="text-center p-4">
+                                      <svg class="w-8 h-8 mx-auto mb-2 text-muted-foreground/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                      </svg>
+                                      <p class="text-xs text-muted-foreground/50">Image loading...</p>
+                                    </div>
+                                  </div>
+                                `;
+                              }
+                            }
+                          }}
+                          onLoad={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'block';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                            <ZoomIn size={16} className="text-white" />
+                          </div>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-white text-xs font-medium truncate">{image.title}</p>
+                          <p className="text-white/70 text-xs">{image.category}</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <p className="text-white text-xs font-medium truncate">{image.title}</p>
-                      <p className="text-white/70 text-xs">{image.category}</p>
-                    </div>
+                    </motion.div>
+                  ))}
+              </AnimatePresence>
+              
+              {/* Filler divs to ensure no empty space */}
+              {displayedImages.filter(image => activeCategory === "All" ? true : image.category === activeCategory.toLowerCase()).length === 0 && (
+                <>
+                  {[1, 2, 3, 4, 5, 6].map((i) => (
+                    <motion.div
+                      key={`filler-${i}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="col-span-1 row-span-1 bg-gradient-to-br from-muted/50 to-muted border border-border/20 rounded-lg flex items-center justify-center"
+                    >
+                      <div className="text-center p-4">
+                        <div className="w-12 h-12 mx-auto mb-2 bg-muted/50 rounded-full flex items-center justify-center">
+                          <Sparkles size={20} className="text-muted-foreground/50" />
+                        </div>
+                        <p className="text-xs text-muted-foreground/50">No images yet</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </>
+              )}
+            </div>
+            
+            {/* Expandable section to fill remaining screen space */}
+            <div className="min-h-[200px] bg-gradient-to-b from-background to-muted/20 mt-8 rounded-lg border border-border/10">
+              <div className="p-8 text-center">
+                <div className="max-w-2xl mx-auto">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">More Amazing Content</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Explore our complete collection of visual stories and creative work
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                    {['Photography', 'Video', 'Events', 'Creative'].map((service, index) => (
+                      <motion.div
+                        key={service}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border border-border/20 hover:border-secondary/30 transition-all"
+                      >
+                        <div className="w-8 h-8 mx-auto mb-2 bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-full flex items-center justify-center">
+                          {service === 'Photography' && <Camera size={16} className="text-secondary" />}
+                          {service === 'Video' && <Film size={16} className="text-secondary" />}
+                          {service === 'Events' && <Sparkles size={16} className="text-secondary" />}
+                          {service === 'Creative' && <Music size={16} className="text-secondary" />}
+                        </div>
+                        <p className="text-xs text-muted-foreground">{service}</p>
+                      </motion.div>
+                    ))}
                   </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Stats Section */}
