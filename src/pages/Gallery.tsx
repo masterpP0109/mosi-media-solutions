@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, X, ZoomIn, Film, Camera, Music, Sparkles } from "lucide-react";
 import Metadata from "@/components/Metadata";
-import Aurora from "@/components/Aurora";
-import RippleGrid from "@/components/RippleGrid";
 import { SkeletonCard } from "@/components/Skeleton";
 import { useGalleryData } from "@/hooks/useGalleryData";
 import { GalleryImage } from "@/types/gallery";
@@ -28,6 +26,28 @@ const Gallery = () => {
     activeCategory === "All" ? undefined : activeCategory.toLowerCase()
   );
 
+  const [carouselImages, setCarouselImages] = useState<GalleryImage[]>([]);
+  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
+
+  // Set up 5-image carousel from backend
+  useEffect(() => {
+    if (images.length > 0) {
+      // Take first 5 images for carousel and ensure proper type
+      const selectedImages = images.slice(0, 5) as GalleryImage[];
+      setCarouselImages(selectedImages);
+    }
+  }, [images]);
+
+  // Rotate carousel images every 5 seconds
+  useEffect(() => {
+    if (carouselImages.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentCarouselIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [carouselImages]);
+
   // Image rotation effect - change images within cards every 30 seconds with more variety
   useEffect(() => {
     if (images.length > 0) {
@@ -44,7 +64,7 @@ const Gallery = () => {
       const cardCount = calculateCardCount();
       
       // Show initial images
-      const initialImages = images.slice(0, Math.min(cardCount, images.length));
+      const initialImages = images.slice(0, Math.min(cardCount, images.length)) as GalleryImage[];
       setDisplayedImages(initialImages);
       
       // Set up rotation interval - rotate through ALL available images
@@ -59,14 +79,14 @@ const Gallery = () => {
           if (availableImages.length >= cardCount) {
             // If we have enough new images, show all new ones
             const shuffled = [...availableImages].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, cardCount);
+            return shuffled.slice(0, cardCount) as GalleryImage[];
           } else {
             // If not enough new images, mix new with some old ones
             const newImages = [...availableImages];
             const neededMore = cardCount - availableImages.length;
             const oldImages = images.filter(img => !newImages.includes(img))
               .sort(() => 0.5 - Math.random()).slice(0, neededMore);
-            return [...newImages, ...oldImages];
+            return [...newImages, ...oldImages] as GalleryImage[];
           }
         });
       }, 30000); // Change every 30 seconds for more variety
@@ -85,7 +105,7 @@ const Gallery = () => {
       try {
         const { getRandomImages } = await import('@/hooks/useDatabaseImages');
         const fallbacks = await getRandomImages(10); // Get 10 random images as fallbacks
-        setFallbackImages(fallbacks);
+        setFallbackImages(fallbacks as GalleryImage[]);
       } catch (error) {
         console.error('Error fetching fallback images:', error);
       }
@@ -169,32 +189,44 @@ const Gallery = () => {
         ogUrl="https://mosimediasolutions.com/gallery"
       />
       
-      {/* Hero Section */}
+      {/* Hero Section with 5-Image Carousel */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+        {/* Carousel Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(139,0,0,0.15),transparent_50%),radial-gradient(ellipse_at_30%_70%,rgba(25,25,112,0.25),transparent_50%),#030508]" />
-          <Aurora
-            colorStops={["#191970","#2F2F5F","#8B0000"]}
-            blend={0.85}
-            amplitude={1.1}
-            speed={1.3}
-          />
-          <div className="absolute inset-0">
-            <RippleGrid
-              enableRainbow={false}
-              gridColor="#8B0000"
-              rippleIntensity={0.015}
-              gridSize={10}
-              gridThickness={8}
-              mouseInteraction={true}
-              mouseInteractionRadius={1.8}
-              opacity={0.2}
-              vignetteStrength={1.2}
-              glowIntensity={0.03}
-            />
-          </div>
+          {carouselImages.length > 0 && (
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentCarouselIndex}
+                src={carouselImages[currentCarouselIndex].url}
+                alt={carouselImages[currentCarouselIndex].title}
+                className="w-full h-full object-cover"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 1 }}
+              />
+            </AnimatePresence>
+          )}
         </div>
         
+        {/* Carousel Indicators */}
+        {carouselImages.length > 0 && (
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+            {carouselImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentCarouselIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentCarouselIndex 
+                    ? "bg-white w-8" 
+                    : "bg-white/50 hover:bg-white/75"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+        
+        {/* Content Overlay */}
         <div className="relative z-10 container mx-auto text-center px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -206,7 +238,7 @@ const Gallery = () => {
               <span className="text-gradient-brand">Visual Stories</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Explore our collection ofcaptured moments and creative work. Each image tells a unique story.
+              Explore our collection of captured moments and creative work. Each image tells a unique story.
             </p>
           </motion.div>
         </div>
