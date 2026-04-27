@@ -9,7 +9,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import ImageCarousel from "@/components/ImageCarousel";
-import WorkHistory from "@/components/WorkHistory";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -47,15 +46,7 @@ function App() {
           <Navbar />
           <PageTransition>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <Index />
-                    <WorkHistory />
-                  </>
-                }
-              />
+              <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/portfolio" element={<Portfolio />} />
