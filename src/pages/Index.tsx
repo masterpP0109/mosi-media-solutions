@@ -200,11 +200,94 @@ const Index = () => {
                 )}
               </div>
             </motion.div>
+       </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Services Preview */}
+        {/* Team at Work */}
+        <section className="section-padding bg-card">
+          <div className="container mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <p className="text-secondary text-sm uppercase tracking-[0.2em] font-medium mb-3">Our Team</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Mosi Media Team at Work</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Dedicated professionals crafting exceptional multimedia experiences with creativity and precision.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl max-w-6xl mx-auto"
+            >
+              <div className="aspect-video bg-gradient-to-br from-secondary/20 to-accent/20 relative">
+                <img
+                  src="/assets/team-work.jpg"
+                  alt="Mosi Media team at work on production"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="absolute bottom-0 left-0 right-0 p-8"
+                >
+                  <div className="flex flex-wrap gap-4 justify-center">
+                    <div className="bg-black/40 backdrop-blur-sm rounded-lg px-4 py-2">
+                      <span className="text-white text-sm font-medium">Video Production</span>
+                    </div>
+                    <div className="bg-black/40 backdrop-blur-sm rounded-lg px-4 py-2">
+                      <span className="text-white text-sm font-medium">Photography</span>
+                    </div>
+                    <div className="bg-black/40 backdrop-blur-sm rounded-lg px-4 py-2">
+                      <span className="text-white text-sm font-medium">Live Events</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="grid md:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto"
+            >
+              <div className="text-center p-6">
+                <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
+                  <Camera className="w-8 h-8 text-secondary" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Expert Crew</h3>
+                <p className="text-sm text-muted-foreground">Skilled professionals with years of experience in multimedia production</p>
+              </div>
+              <div className="text-center p-6">
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <Sparkles className="w-8 h-8 text-secondary" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Creative Vision</h3>
+                <p className="text-sm text-muted-foreground">Innovative storytelling that brings your brand to life</p>
+              </div>
+              <div className="text-center p-6">
+                <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
+                  <Star className="w-8 h-8 text-secondary" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Quality Focus</h3>
+                <p className="text-sm text-muted-foreground">Attention to detail in every frame and every project</p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Services Preview */}
       <section className="section-padding bg-card">
         <div className="container mx-auto">
           <motion.div 

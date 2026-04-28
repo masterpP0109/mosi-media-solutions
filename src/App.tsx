@@ -32,13 +32,14 @@ function App() {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ImageCarousel
+           <ImageCarousel
             images={[
-              { src: "/images/hero-bg.jpg", alt: "Hero Background" },
-              { src: "/images/services-photo.jpg", alt: "Services" },
+              { src: "/assets/hero-bg.jpg", alt: "Hero Background" },
+              { src: "/assets/services-photo.jpg", alt: "Services" },
               { src: "/assets/about-team.jpg", alt: "About Team" },
               { src: "/assets/services-av.jpg", alt: "Audio Visual" },
               { src: "/assets/services-events.jpg", alt: "Events" },
+              { src: "/assets/services-video.jpg", alt: "Video Production" }
             ]}
             autoPlay={true}
             interval={4000}
