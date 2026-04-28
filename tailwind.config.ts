@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Aclonica', 'sans-serif'],
-        body: ['Poppins', 'sans-serif'],
+        heading: ["Arial", "Helvetica Neue", "Helvetica", "sans-serif"],
+        body: ["Poppins", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
